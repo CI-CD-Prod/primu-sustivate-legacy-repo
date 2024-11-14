@@ -1,0 +1,16 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "primusustivatedevrep989694c0",
+  "functionName": "primusustivatedevrep989694c0CustomMessage",
+  "resourceName": "primusustivatedevrep989694c0CustomMessage",
+  "parentStack": "auth",
+  "triggerEnvs": "[]",
+  "triggerDir": "/snapshot/amplify-cli/build/node_modules/@aws-amplify/amplify-category-auth/provider-utils/awscloudformation/triggers/CustomMessage",
+  "triggerTemplate": "CustomMessage.json.ejs",
+  "triggerEventPath": "CustomMessage.event.json",
+  "roleName": "primusustivatedevrep989694c0CustomMessage",
+  "skipEdit": true
+}

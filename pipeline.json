@@ -1,0 +1,98 @@
+{
+    "pipeline": {
+        "name": "primu-sustivate-dev-pipeline-web",
+        "roleArn": "arn:aws:iam::905418178237:role/primu-sustivate-dev-pipeline-role-web",
+        "artifactStore": {
+            "type": "S3",
+            "location": "primu-sustivate-dev-artifacts-bucket-web",
+            "encryptionKey": {
+                "id": "arn:aws:kms:eu-west-1:905418178237:key/b4c165cd-0671-4d43-8dd3-e02a2b9e267e",
+                "type": "KMS"
+              }
+        },
+        "stages": [
+            {
+                "name": "Source",
+                "actions": [
+                    {
+                        "name": "SourceAction",
+                        "actionTypeId": {
+                            "category": "Source",
+                            "owner": "AWS",
+                            "provider": "CodeCommit",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "BranchName": "master",
+                            "RepositoryName": "primu-sustivate-dev-repo-web"
+                        },
+                        "outputArtifacts": [
+                            {
+                                "name": "SourceOutput"
+                            }
+                        ],
+                        "inputArtifacts": []
+                    }
+                ]
+            },
+            {
+                "name": "Build-Web",
+                "actions": [
+                    {
+                        "name": "BuildAction",
+                        "actionTypeId": {
+                            "category": "Build",
+                            "owner": "AWS",
+                            "provider": "CodeBuild",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "ProjectName": "primu-sustivate-dev-codebuild-ui-web"
+                        },
+                        "outputArtifacts": [
+                            {
+                                "name": "UiBuildOutput"
+                            }
+                        ],
+                        "inputArtifacts": [
+                            {
+                                "name": "SourceOutput"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "DeployToEC2Web",
+                "actions": [
+                    {
+                        "name": "DeployAction",
+                        "actionTypeId": {
+                            "category": "Deploy",
+                            "owner": "AWS",
+                            "provider": "CodeDeploy",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "roleArn": "arn:aws:iam::975050169800:role/primu-sustivate-dev-crossaccount-role-web",
+                        "configuration": {
+                            "ApplicationName": "primu-sustivate-dev-application-deploy-web",
+                            "DeploymentGroupName": "primu-sustivate-dev-deploygroup-deploy-web"
+                        },
+                        "outputArtifacts": [],
+                        "inputArtifacts": [
+                            {
+                                "name": "UiBuildOutput"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "version": 1,
+        "executionMode": "SUPERSEDED",
+        "pipelineType": "V1"
+    }
+}
