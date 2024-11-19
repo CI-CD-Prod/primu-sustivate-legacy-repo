@@ -1,18 +1,8 @@
 {
   "auth": {
-    "primusustivatedevrep989694c0": {
+    "primusustivatelegacyfde82eb9": {
       "customAuth": false,
-      "dependsOn": [
-        {
-          "attributes": [
-            "Arn",
-            "Name"
-          ],
-          "category": "function",
-          "resourceName": "primusustivatedevrep989694c0CustomMessage",
-          "triggerProvider": "Cognito"
-        }
-      ],
+      "dependsOn": [],
       "frontendAuthConfig": {
         "mfaConfiguration": "OFF",
         "mfaTypes": [
@@ -30,8 +20,7 @@
         ],
         "socialProviders": [],
         "usernameAttributes": [
-          "EMAIL",
-          "PHONE_NUMBER"
+          "EMAIL"
         ],
         "verificationMechanisms": [
           "EMAIL"
@@ -39,31 +28,6 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
-    }
-  },
-  "function": {
-    "primusustivatedevrep989694c0CustomMessage": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_primusustivatedevrep989694c0CustomMessage_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "primusustivatedevrep989694c0CustomMessage"
-        }
-      ]
-    },
-    "AMPLIFY_function_primusustivatedevrep989694c0CustomMessage_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "primusustivatedevrep989694c0CustomMessage"
-        }
-      ]
     }
   }
 }
